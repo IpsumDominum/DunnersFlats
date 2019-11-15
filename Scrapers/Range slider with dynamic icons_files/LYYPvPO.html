@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
+<link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111">
+<title>CodePen - Range slider with dynamic icons</title>
+<link rel="stylesheet" href="LYYPvPO_data/all.css">
+<style>
+  html {
+  min-height: 100%;
+}
+body {
+  background: url(https://i.imgur.com/t17127v.jpg) no-repeat;
+  background-size: 100% auto;
+  background-position: center center;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+.input-range {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.input-range #range-slider {
+  width: calc(100% - 16.66666667%);
+  order: 10;
+  margin: 0;
+  border: none;
+  background-color: #f1f1f1;
+  margin-top: 2vw;
+  border-radius: 2vw;
+  height: 0.8vw;
+}
+@media screen and (max-width: 768px) {
+  .input-range #range-slider {
+    margin-top: 4vw;
+  }
+}
+.input-range #range-slider .ui-slider-range {
+  background-color: #bad6ef;
+  border-radius: 2vw;
+  -webkit-transition: all ease 250ms;
+  -moz-transition: all ease 250ms;
+  -o-transition: all ease 250ms;
+  transition: all ease 250ms;
+  cursor: pointer;
+  height: 0.8vw;
+}
+.input-range #range-slider .ui-slider-handle {
+  background-color: #bad6ef;
+  border: none;
+  width: 1.5vw;
+  height: 1.5vw;
+  border-radius: 20px;
+  transform: translateY(-50%);
+  top: 50%;
+  margin-left: -0.75vw;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  outline: none;
+  -webkit-transition: all ease 250ms;
+  -moz-transition: all ease 250ms;
+  -o-transition: all ease 250ms;
+  transition: all ease 250ms;
+  cursor: pointer;
+}
+.input-range #range-slider[data-value="1"] .ui-slider-range,
+.input-range #range-slider[data-value="1"] .ui-slider-handle {
+  background-color: #bad6ef;
+}
+.input-range #range-slider[data-value="2"] .ui-slider-range,
+.input-range #range-slider[data-value="2"] .ui-slider-handle {
+  background-color: #bad6ef;
+}
+.input-range #range-slider[data-value="3"] .ui-slider-range,
+.input-range #range-slider[data-value="3"] .ui-slider-handle {
+  background-color: #ffb72f;
+}
+.input-range #range-slider[data-value="4"] .ui-slider-range,
+.input-range #range-slider[data-value="4"] .ui-slider-handle {
+  background-color: #ffb72f;
+}
+.input-range #range-slider[data-value="5"] .ui-slider-range,
+.input-range #range-slider[data-value="5"] .ui-slider-handle {
+  background-color: #fd6b6b;
+}
+.input-range #range-slider[data-value="6"] .ui-slider-range,
+.input-range #range-slider[data-value="6"] .ui-slider-handle {
+  background-color: #fd6b6b;
+}
+.input-range .labels {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.input-range .labels .fas {
+  width: calc(100% / 6);
+  text-align: center;
+  cursor: pointer;
+  color: #f1f1f1;
+  -webkit-transition: all ease 250ms;
+  -moz-transition: all ease 250ms;
+  -o-transition: all ease 250ms;
+  transition: all ease 250ms;
+}
+.input-range .labels .fas:before {
+  font-size: 4vw;
+}
+.input-range .labels .fas:hover {
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -o-transform: scale(1.1);
+  transform: scale(1.1);
+}
+.input-range .labels[data-value="1"] .fas:nth-child(-n + 1) {
+  color: #bad6ef;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.input-range .labels[data-value="2"] .fas:nth-child(-n + 2) {
+  color: #bad6ef;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.input-range .labels[data-value="3"] .fas:nth-child(-n + 3) {
+  color: #ffb72f;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.input-range .labels[data-value="4"] .fas:nth-child(-n + 4) {
+  color: #ffb72f;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.input-range .labels[data-value="5"] .fas:nth-child(-n + 5) {
+  color: #fd6b6b;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.input-range .labels[data-value="6"] .fas:nth-child(-n + 6) {
+  color: #fd6b6b;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+</style>
+<script>
+  window.console = window.console || function(t) {};
+</script>
+<script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+</head>
+<body translate="no">
+<div class="input-range">
+<div id="range-slider" data-value="4" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><div class="ui-slider-range ui-corner-all ui-widget-header ui-slider-range-min" style="width: 60%;"></div><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 60%;"></span></div>
+<div id="labels-list" class="labels" data-value="4"><i class="fas fa-fire"></i><i class="fas fa-fire"></i><i class="fas fa-fire"></i><i class="fas fa-fire"></i><i class="fas fa-fire"></i><i class="fas fa-fire"></i></div>
+</div>
+<script src="LYYPvPO_data/stopExecutionOnTimeout-de7e2ef6bfefd24b79a3f68b414b87b8db5b08.js"></script>
+<script src="LYYPvPO_data/less.js"></script>
+<script src="LYYPvPO_data/jquery.js"></script>
+<script src="LYYPvPO_data/jquery-ui.js"></script>
+<script id="rendered-js">
+      var max = 6, // Set max value
+initvalue = 4, // Set the initial value
+icon = "fa-fire", // Set the icon (https://fontawesome.com/icons)
+target = document.querySelectorAll('[data-value]'),
+listIcon = document.getElementById("labels-list");
+
+// Function to update du value
+
+function updateValue(target, value) {
+  target.forEach(function (currentIndex) {
+    currentIndex.dataset.value = value;
+  });
+}
+
+// Init the number of item with the initial value settings
+
+for (i = 0; i < max; i++) {if (window.CP.shouldStopExecution(0)) break;
+  var picto = "<i class='fas " + icon + "'></i>";
+  $(".labels").append(picto);
+}window.CP.exitedLoop(0);
+
+updateValue(target, initvalue);
+
+// Update the slider on click
+
+$('.fas').on("click", function () {
+  var index = $(this).index() + 1;
+  $("#range-slider").slider("value", index);
+  updateValue(target, index);
+});
+
+
+// Init the slider
+
+$("#range-slider").slider({
+  range: "min",
+  value: initvalue,
+  min: 1,
+  max: max,
+
+  slide: function (event, ui) {
+    updateValue(target, ui.value);
+  } });
+      //# sourceURL=pen.js
+    </script>
+
+
+</body></html>

@@ -2,56 +2,42 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href={{url_for('static',filename="style.css")}}>
+<link rel="stylesheet" href={{url_for('static',filename="menu.css")}}>
+<link rel="stylesheet" href={{url_for('static',filename="another.css")}}>
 <link href='https://fonts.googleapis.com/css?family=Yellowtail' rel='stylesheet'>
-<body style="background-image:url({{url_for('static',filename="bg.jpg")}})">
-
-  <h1> SEE ALL Flats IN DUNEDINNNNN</h1>
-  {% if page =="1" %}
-  <a href="#" class="bigarrow disabled previous round" style="position:absolute;left=0%;top:10%">&#8249;</a>
-  {% else %}
-  <a href="/?page={{page|int -1}}" class="bigarrow previous round" style="position:absolute;left=0%;top:10%">&#8249;</a>
-  {% endif %}
-</div>
-
-<div class="col s5">
-  <div class="container">
-    <p class="pages" style="position:absolute;left:40%;top:6%"><strong>Page {{page}} out of {{total_pages}}</strong> </p>
-
-<p>    showing from {{((page|int)-1)*8+1}} to 
-    {{((page|int))*8}} out of total of {{total_house|int +1}}</p>
-<div class="row">
-  {% for listing in listings %}
-  {% if (loop.index)>((page|int)-1)*8 and loop.index<(page|int)*8 +1 %}
-    {% if (loop.index+3) % 4==0 %}
-    </div>
-    <div class="row">
-    {% endif %}
-      <div class="col s3 itembox">
-       <div class="row info">
-         <p>{{listing['title']}}</p>
-       </div>
-       <p>Price:{{listing['price']}}/week</p>
-       <p><i class="fa fa-bed">:{{listing['bedrooms']}}</i>
-         <i class="fa fa-bath">:{{listing['bathrooms']}}</i>
-       <i class="fa fa-car">:{{listing['garages']}}</i></p>
-      <div class="row thumb">
-        <img class="thumbnail" onclick="document.location='{{listing['link']}}'" src="{{listing.thumbnail}}" width="100%" height="80%" >
-        </div>
+<div id='menumain'>
+      <center>
+          <div class="container" style="position:absolute;left:10%;top:10%">
+              <h1 class="heading" style="position:absolute" data-target-resolver></h1>
+            </div>
+          </center>
+      <div class="row">
+    <span class="part part--left" style="position:absolute;left:10%;top:60%">
+        <span class="letter">Dunners</span>	
+      </span>
+      
+      <span class="part part--right" style="top:60%;left:60%;position:absolute">
+          <span class="part part--center">
+              <span class="letter letter--i">&#10085;</span>
+              <span class="letter letter--o">&#10085;</span>
+            </span>      
+          <span class="letter">FLATS</span>
+          <span class="letter"></span>
+        </span>
       </div>
-      {% endif %}
-      {% endfor %}
+      <div class="row">
+    <div class="flex dark" style="width:140%">
+        <a href="{{url_for('findproperty')}}" class="bttn-dark2" style="position:absolute;top:20%;left:10%;width:80%;height:10%">Property Managements</a>
+        <a href="#0" class="bttn-dark" style="position:absolute;top:30%;left:10%; width:80%;height:10%">Individual Listings</a>
+        <a href="{{url_for('rate')}}" class="bttn-dark2"style="position:absolute;top:40%;left:10%;width:80%;height:10%" >Rate Flats</a>
+        <a href="#0" class="bttn-dark" style="position:absolute;top:50%;left:10%; width:80%;height:10%">Flatmate at first site &#10084;</a>
     </div>
-
-      </div>
-</div>
-{% if page|int == total_pages|int %}
-<a href="#" class="bigarrow disabled next round" style="position:absolute;right:0%;top:10%">&#8250;</a>
-{% else %}
-<a href="/?page={{page|int +1}}" class="bigarrow next round" style="position:absolute;right:0%;top:10%">&#8250;</a>
-{% endif %}
-
-</body>
-
+    </div>
+  </div>
 <!-- Compiled and minified JavaScript -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="{{url_for('static',filename="extra.js")}}"></script>
+<script>
+
+</script>

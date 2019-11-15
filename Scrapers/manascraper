@@ -1,0 +1,7 @@
+from requests import get
+from requests.exceptions import RequestException
+from contextlib import closing
+from bs4 import BeautifulSoup
+import re
+root_url = "https://www.ljhooker.co.nz"
+raw_url = "https://www.ljhooker.co.nz/search/property?tt=rent&pid=&r=Otago&d=51&s%5B%5D=&ss=1&bp1=&bp2=&rp1=&rp2=&b1=&b2=&pt=&b=&c=&k=&searchType=residential&op=Find+Properties&form_build_id=form-15V1TjoaVV0yQRHmp1RyDmaAglDVAJ7Y-7Yct3eaab4&form_id=residential_property_search_form&pg=2"

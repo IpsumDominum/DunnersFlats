@@ -1,0 +1,146 @@
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href={{url_for('static',filename="style.css")}}>
+<link rel="stylesheet" href={{url_for('static',filename="anotheranother.css")}}>
+<link rel="stylesheet" href={{url_for('static',filename="css/bootstrap.css")}}>
+<link rel="stylesheet" href={{url_for('static',filename="css/pe-icon-7-stroke.css")}}>
+<link rel="stylesheet" href={{url_for('static',filename="css/rotating-card.css")}}>
+<link href='https://fonts.googleapis.com/css?family=Yellowtail' rel='stylesheet'>
+<html style="background:#3e333f;">
+<form>
+              <div class="inner-form">
+                <div class="basic-search">
+                  <div class="input-field">
+                    <input id="search" type="text" placeholder="Search... " />
+                    <div class="icon-wrap">
+                    </div>
+                </div>
+            </form>
+<body style="background:#3e333f" >  
+  <div id="properties" >
+<div class="col s5">
+  <div class="container" >    
+<p style="color:white">    showing from {{((page|int)-1)*8+1}} to 
+    {{((page|int))*8}} out of total of {{total_house|int +1}}</p>
+<div class="row">
+  {% for listing in listings %}
+  {% if (loop.index)>((page|int)-1)*8 and loop.index<(page|int)*8 +1 %}
+    {% if (loop.index+3) % 4==0 %}
+    </div>
+    <div class="row">
+    {% endif %}
+    <div class="col s3 card-container">
+                <div class="card">
+                    <div class="front">
+                        <div class="cover">
+                                <img class="thumbnail" onclick="document.location='{{listing['link']}}'" src="https://i.stack.imgur.com/RdkOb.jpg" width="100%" height="80%" >
+                        </div>
+                        <div class="user">
+                                <div class="row thumb">
+                                        <img class="thumbnail" onclick="document.location='{{listing['link']}}'" src="{{listing.thumbnail}}" width="100%" height="80%" >
+                                        </div>
+                        </div>
+                        <div class="content">
+                            <div class="main">
+                                <h3 class="name">Address</h3>
+                                <p class="profession">Price:{{listing['price']}}/week</p>
+                                <p class="text-center">
+                                <p><i class="fa fa-bed">:{{listing['bedrooms']}}</i>
+                                  <i class="fa fa-bath">:{{listing['bathrooms']}}</i>
+                                <i class="fa fa-car">:{{listing['garages']}}</i></p></p>
+                            </div>
+                            <div class="footer">
+                                <div class="rating">
+                                    <i class="fa fa-mail-forward"></i>More Info
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- end front panel -->
+                    <div class="back">
+                        <div class="header">
+                            <h5 class="motto">"{{listing['title']}}"</h5>
+                        </div>
+                        <div class="content">
+                            <div class="main">
+                                <p class="text-center">Description placeholder</p>
+       
+                                <div class="stats-container">
+                                    <div class="stats">                                          
+                                        <h4>{{listing['bedrooms']}}</h4>
+                                        <p>
+                                                <i class="fa fa-bed"></i>
+                                        </p>
+                                    </div>
+                                    <div class="stats">
+                                        <h4>{{listing['bathrooms']}}</h4>
+                                        <p>
+                                        <i class="fa fa-bath"></i>
+                                        </p>
+                                    </div>
+                                    <div class="stats">
+                                        <h4>{{listing['garages']}}</h4>
+                                        <p>
+                                        <i class="fa fa-car"></i>
+                                        </p>
+                                    </div>
+                                </div>
+                                <img class="thumbnail" onclick="document.location='{{listing['link']}}'" src="data:image/png;base64,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" width="100%" height="80%" >       
+                            </div>
+                            
+                        </div>
+                    </div> <!-- end back panel -->
+                </div> <!-- end card -->
+            </div> <!-- end card-container -->
+                  
+                  
+   <!---
+      <div class="col s3 itembox">
+       <div class="row info">
+         <p>{{listing['title']}}</p>
+       </div>
+       <p>Price:{{listing['price']}}/week</p>
+       <p><i class="fa fa-bed">:{{listing['bedrooms']}}</i>
+         <i class="fa fa-bath">:{{listing['bathrooms']}}</i>
+       <i class="fa fa-car">:{{listing['garages']}}</i></p>
+      <div class="row thumb">
+        <img class="thumbnail" onclick="document.location='{{listing['link']}}'" src="{{listing.thumbnail}}" width="100%" height="80%" >
+        </div>
+      </div>-->
+      {% endif %}
+      {% endfor %}
+    </div>
+      </div>
+</div>
+  {% if page =="1" %}
+  <a href="#" class="bigarrow disabled previous round" style="position:absolute;left:25%;top:90%">&#8249;</a>
+  {% else %}
+  <a href="/findproperty?page={{page|int -1}}" class="bigarrow previous round" style="position:absolute;left:25%;top:90%">&#8249;</a>
+  {% endif %}
+{% if page|int == total_pages|int %}
+<a href="#" class="bigarrow disabled next round" style="position:absolute;right:25%;top:90%">&#8250;</a>
+{% else %}
+<a href="/findproperty?page={{page|int +1}}" class="bigarrow next round" style="position:absolute;right:25%;top:90%">&#8250;</a>
+{% endif %}
+</div>
+  <center><p class="pages" style="color:white"><strong>Page {{page}} out of {{total_pages}}</strong> </p></center>
+</body>
+</html>
+
+<!-- Compiled and minified JavaScript -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="{{url_for('static',filename="extraextra.js")}}"></script>
+<script src="{{url_for('static',filename="js/jquery-1.10.2.js")}}"></script>
+<script src="{{url_for('static',filename="js/bootstrap.min.js")}}"></script>
+
+<script>
+var properties = document.getElementById('properties');
+var menu = document.getElementById('menumain');
+function show_properties(){
+  properties.style.display="inline-block";
+  manu.style.display="none";
+
+
+}
+
