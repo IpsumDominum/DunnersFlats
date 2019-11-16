@@ -27,7 +27,7 @@ def parse_listing(listing):
                     "link":link,
                     "thumbnail":thumbnail,
                     "manager":"mana"}
-    print(listing_info)
+
     return listing_info
 def mana_scrape():
     all_listings = []

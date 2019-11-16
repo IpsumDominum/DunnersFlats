@@ -1,11 +1,12 @@
 from Scrapers.hookerscraper import hooker_scrape
 from Scrapers.manascraper import mana_scrape
+from Scrapers.darlingscraper import darling_scrape
 from app import app
 from flask import render_template
 from flask import request
 import math
 import re
-listings = hooker_scrape() + mana_scrape()
+listings = hooker_scrape() + mana_scrape() + darling_scrape()
 
 
 total_pages = math.ceil(len(listings)/8)
