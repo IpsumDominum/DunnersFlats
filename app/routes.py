@@ -1,10 +1,13 @@
 from Scrapers.hookerscraper import hooker_scrape
+from Scrapers.manascraper import mana_scrape
 from app import app
 from flask import render_template
 from flask import request
 import math
 import re
-listings = hooker_scrape()
+listings = hooker_scrape() + mana_scrape()
+
+
 total_pages = math.ceil(len(listings)/8)
 total_house = len(listings)
 @app.route('/')

@@ -1,38 +1,13 @@
-from requests import get
-from requests.exceptions import RequestException
-from contextlib import closing
 from bs4 import BeautifulSoup
+try:
+    from Scrapers.utils import simple_get
+except Exception:
+    from utils import simple_get
 import re
 root_url = "https://www.ljhooker.co.nz"
 raw_url = "https://www.ljhooker.co.nz/search/property?tt=rent&pid=&r=Otago&d=51&s%5B%5D=&ss=1&bp1=&bp2=&rp1=&rp2=&b1=&b2=&pt=&b=&c=&k=&searchType=residential&op=Find+Properties&form_build_id=form-15V1TjoaVV0yQRHmp1RyDmaAglDVAJ7Y-7Yct3eaab4&form_id=residential_property_search_form&pg=2"
 current_page = 1
 
-def simple_get(url):
-     try:
-        with closing(get(url, stream=True)) as resp:
-            if is_good_response(resp):
-                return resp.content
-            else:
-                return None
-     except RequestException as e:
-        log_error('Error during requests to {0} : {1}'.format(url, str(e)))
-        return None
-def is_good_response(resp):
-    """
-    Returns True if the response seems to be HTML, False otherwise.
-    """
-    content_type = resp.headers['Content-Type'].lower()
-    return (resp.status_code == 200 
-            and content_type is not None 
-            and content_type.find('html') > -1)
-
-def log_error(e):
-    """
-    It is always a good idea to log errors. 
-    This function just prints them, but you can
-    make it do anything.
-    """
-    print(e)
 
 def parse_listing(listing):
     listing_soup = BeautifulSoup(str(listing),"html.parser")
@@ -50,7 +25,8 @@ def parse_listing(listing):
                     "bathrooms":facilities[1],
                     "garages":facilities[2],
                     "link":link,
-                    "thumbnail":thumbnail}
+                    "thumbnail":thumbnail,
+                    "manager":"hooker"}
     return listing_info
 def hooker_scrape():
     all_listings = []

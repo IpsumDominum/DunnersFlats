@@ -67,7 +67,10 @@
         transform: rotateY( 180deg );
         z-index: 3;
 }
+.back:hover{
+    border:orange solid 4px;
 
+}
 .back .btn-simple{
     position: absolute;
     left: 0;
