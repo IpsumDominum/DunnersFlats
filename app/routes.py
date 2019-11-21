@@ -11,6 +11,8 @@ listings = hooker_scrape() + mana_scrape() + darling_scrape()
 
 total_pages = math.ceil(len(listings)/8)
 total_house = len(listings)
+
+
 @app.route('/')
 @app.route('/index')
 def index():

@@ -15,18 +15,33 @@ def parse_listing(listing):
     title = listing_soup.find("h2").text
     price = re.search('\d+',listing_soup.find("div",{"class":"featured_price_boxes"}).text)
     facilities = re.findall('\d+',listing_soup.find("div",{"class":"quick_summary"}).text)
-    link= root_url+listing_soup.find("a",{"class":"property_link"},href=True)['href']
     thumbnail= "http://"+listing_soup.find("img")['src'][2:]
+    #GET listing specific soup
+    link= root_url+listing_soup.find("a",{"class":"property_link"},href=True)['href']
+    listing_html = simple_get(link)
+    listing_specific_soup = BeautifulSoup(str(listing_html),"html.parser")
+    moreinfo = listing_specific_soup.find("div",{"id":"listing_description"})
+    moreinfo_soup = BeautifulSoup(str(moreinfo),"html.parser")
+    address = moreinfo_soup.findAll("h3")[1].text
+    items = moreinfo_soup.findAll("li")
+    if "No" in items[2].text:
+        pet = 0
+    else:
+        pet = 1
     if(price!=None):
         price = price.group()
-    listing_info = {"title":title,
+    listing_info = {"heroText":title,
+                    "description":"Completely devoid of any description what so ever",
                     "price":price,
+                    "address":address,
+                    "pet":pet,                    
                     "bedrooms":facilities[0],
                     "bathrooms":facilities[1],
-                    "garages":facilities[2],
-                    "link":link,
-                    "thumbnail":thumbnail,
-                    "manager":"hooker"}
+                    "parking":facilities[2],
+                    "url":link,
+                    "image":thumbnail,
+                    "agent":"hooker"}        
+
     return listing_info
 def hooker_scrape():
     all_listings = []

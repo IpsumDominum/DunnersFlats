@@ -10,24 +10,29 @@ raw_url = "https://www.manaproperty.co.nz/getPropertiesAsJSON?fbclid=IwAR02KLQKd
 
 
 def parse_listing(listing):
-    title = listing['street'] + listing['streetNumber']
+    address = listing['street'] + " " + listing['streetNumber'] + " " + listing['suburb']
     price = listing['rent']
     bedrooms = listing['bedrooms']
     bathrooms = listing['bathrooms']
     garages = listing['garages']
+    pet = int(listing['allowsPets'])
+    description = listing['description']
+    title = listing['furnishing']
     if(garages==""):
         garages = 0
     link = root_url + listing['url']
-    thumbnail = root_url + listing['images'][0]['url']
-    listing_info = {"title":title,
+    thumbnail = root_url + listing['images'][0]['url']    
+    listing_info = {"heroText":title,
+                    "description":description,
                     "price":price,
+                    "address":address,
+                    "pet":pet,                    
                     "bedrooms":bedrooms,
                     "bathrooms":bathrooms,
-                    "garages":garages,
-                    "link":link,
-                    "thumbnail":thumbnail,
-                    "manager":"mana"}
-
+                    "parking":garages,
+                    "url":link,
+                    "image":thumbnail,
+                    "agent":"mana"}
     return listing_info
 def mana_scrape():
     all_listings = []
